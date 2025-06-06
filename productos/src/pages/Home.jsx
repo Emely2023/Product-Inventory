@@ -31,39 +31,33 @@ const HomeProducts = () => {
           </Link>
         </div>
 
-        {/* Tabla */}
-        <div className="overflow-x-auto">
-          <table className="min-w-full border border-gray-200 text-sm text-left">
-            <thead className="bg-gray-100 text-gray-600">
-              <tr>
-                <th className="px-4 py-3 border-b">Nombre</th>
-                <th className="px-4 py-3 border-b">Precio</th>
-                <th className="px-4 py-3 border-b">Categoría</th>
-                <th className="px-4 py-3 border-b">Stock</th>
-                <th className="px-4 py-3 border-b">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products?.map((product) => (
-                <tr key={product.id} className="hover:bg-gray-50 transition">
-                  <td className="px-4 py-3 border-b">{product.nombre}</td>
-                  <td className="px-4 py-3 border-b">${product.precio}</td>
-                  <td className="px-4 py-3 border-b">{product.categoria}</td>
-                  <td className="px-4 py-3 border-b">{product.stock}</td>
-                  <td className="px-4 py-3 border-b flex gap-2">
-                    <Button
-                      text="Editar"
-                      onClick={() => handleUpdateProduct(product.id)}
-                    />
-                    <ButtonDelete
-                      text="Eliminar"
-                      onClick={() => deleteProduct(product.id)}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        {/* Cards para productos */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products?.map((product) => (
+            <div
+              key={product.id}
+              className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300"
+            >
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">{product.nombre}</h3>
+                <p className="text-gray-500 text-sm mb-4">${product.precio}</p>
+                <p className="text-sm text-gray-600 mb-4">Categoría: {product.categoria}</p>
+                <p className="text-sm text-gray-600 mb-4">Stock: {product.stock}</p>
+              </div>
+              <div className="flex justify-between items-center p-4 bg-gray-50 rounded-b-lg">
+                <Button
+                  text="Editar"
+                  onClick={() => handleUpdateProduct(product.id)}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white"
+                />
+                <ButtonDelete
+                  text="Eliminar"
+                  onClick={() => deleteProduct(product.id)}
+                  className="bg-red-600 hover:bg-red-700 text-white"
+                />
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>

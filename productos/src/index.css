@@ -6,8 +6,10 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f5f7fa;
+  background: #ffffff;
   color: #333;
+  text-align: center;
+  padding: auto;  
 }
 
 .container {

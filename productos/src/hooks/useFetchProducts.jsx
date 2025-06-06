@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import {url} from "../utils/apiUrl.jsx"
 
-const API_URL = "https://retoolapi.dev/BuJvOm/productos";
 
 const useFetchProducts = () => {
   const [products, setProducts] = useState([]);
@@ -9,7 +9,7 @@ const useFetchProducts = () => {
   // Obtener todos los productos
   const getProducts = async () => {
     try {
-      const response = await fetch(API_URL);
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Error al obtener productos");
       }
@@ -24,7 +24,7 @@ const useFetchProducts = () => {
   // Obtener producto por ID
   const getProductById = async (id) => {
     try {
-      const response = await fetch(`${API_URL}/${id}`);
+      const response = await fetch(`${url}/${id}`);
       if (!response.ok) {
         throw new Error("Error al obtener el producto");
       }
