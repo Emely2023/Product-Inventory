@@ -11,25 +11,25 @@ const Products = () => {
   const { register, handleSubmit, errors } = useDataProduct(methods);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <Link
-        to="/home"
-        className="inline-block text-center bg-gradient-to-r from-blue-400 to-blue-500 text-white font-semibold py-2 px-4 rounded-lg mb-6 hover:from-blue-500 hover:to-blue-600 transition-all"
-      >
-        ← Volver al inicio
-      </Link>
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+      <div className="w-full max-w-4xl bg-white shadow-2xl rounded-3xl p-8 sm:p-12 border border-blue-200">
+        <Link
+          to="/home"
+          className="inline-block text-sm text-blue-600 hover:text-blue-800 mb-6 font-semibold"
+        >
+          ← Volver al inicio
+        </Link>
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-6 sm:p-10 shadow-xl rounded-2xl space-y-6 border border-gray-200"
-      >
         <Titulo titulo="Formulario de Productos" />
 
-        <p className="text-gray-600 text-sm">
-          Ingresa los datos del producto a registrar o editar.
+        <p className="text-gray-600 text-sm mb-6">
+          Completa los datos para {id ? "editar" : "registrar"} un producto en TecnoMarket.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+        >
           <InputText
             type="text"
             name="nombre"
@@ -39,7 +39,7 @@ const Products = () => {
             errors={errors}
           />
           <InputText
-            type="text"
+            type="number"
             name="precio"
             label="Precio"
             placeholder="Ej. 19.99"
@@ -55,17 +55,22 @@ const Products = () => {
             errors={errors}
           />
           <InputText
-            type="text"
+            type="number"
             name="stock"
-            label="Stock"
+            label="Stock disponible"
             placeholder="Ej. 50"
             register={register}
             errors={errors}
           />
-        </div>
 
-        <Button type="submit" text={id ? "Actualizar producto" : "Guardar producto"} />
-      </form>
+          <div className="sm:col-span-2 flex justify-end">
+            <Button
+              type="submit"
+              text={id ? "Actualizar producto" : "Guardar producto"}
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

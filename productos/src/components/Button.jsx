@@ -1,9 +1,8 @@
-const Button = ({ type, onClick, text }) => {
+const Button = ({ text, onClick }) => {
   return (
     <button
-      type={type}
       onClick={onClick}
-      className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-colors"
+      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 squeare text-sm transition"
     >
       {text}
     </button>

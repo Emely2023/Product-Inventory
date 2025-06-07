@@ -1,14 +1,12 @@
-const ButtonDelete = ({ type, onClick, text }) => {
-    return (
-      <button
-        type={type}
-        onClick={onClick}
-        className="bg-red-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-colors"
-      >
-        {text}
-      </button>
-    );
-  };
-  
-  export default ButtonDelete;
-  
+const ButtonDelete = ({ text, onClick }) => {
+  return (
+    <button
+      onClick={onClick}
+      className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm transition"
+    >
+      {text}
+    </button>
+  );
+};
+
+export default ButtonDelete;

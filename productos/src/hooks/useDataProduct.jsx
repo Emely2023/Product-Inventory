@@ -18,7 +18,7 @@ const useDataProduct = (methods) => {
 
   const navigate = useNavigate();
 
-  // Guardar nuevo producto
+  // Crear nuevo producto
   const saveProductForm = async (dataForm) => {
     try {
       const response = await fetch(API_URL, {
@@ -29,18 +29,15 @@ const useDataProduct = (methods) => {
         body: JSON.stringify(dataForm),
       });
 
-      if (!response.ok) {
-        toast.error("Error al registrar el producto");
-        throw new Error("Error al registrar el producto");
-      }
+      if (!response.ok) throw new Error("Error al registrar el producto");
 
       toast.success("Producto registrado con éxito");
       navigate("/home");
-    } catch (error) {
-      console.error("Error al enviar el producto:", error);
-    } finally {
-      reset();
       getProducts();
+      reset();
+    } catch (error) {
+      console.error("Error al registrar el producto:", error);
+      toast.error("Error al registrar el producto");
     }
   };
 
@@ -55,22 +52,19 @@ const useDataProduct = (methods) => {
         body: JSON.stringify(dataForm),
       });
 
-      if (!response.ok) {
-        toast.error("Error al actualizar el producto");
-        throw new Error("Error al actualizar el producto");
-      }
+      if (!response.ok) throw new Error("Error al actualizar el producto");
 
       toast.success("Producto actualizado con éxito");
       navigate("/home");
+      getProducts();
+      // No se hace reset aquí para conservar el estado tras la edición
     } catch (error) {
       console.error("Error al actualizar el producto:", error);
-    } finally {
-      reset();
-      getProducts();
+      toast.error("Error al actualizar el producto");
     }
   };
 
-  // Decide si guardar nuevo o editar existente
+  // Decide si guardar o editar
   const handleProductAction = (dataForm) => {
     if (id) {
       editProduct(dataForm);
@@ -79,26 +73,30 @@ const useDataProduct = (methods) => {
     }
   };
 
-  // Redirige a edición de producto
-  const handleUpdateProduct = (id) => {
-    navigate(`/products/${id}`);
+  // Navega a la ruta de edición de producto
+  const handleUpdateProduct = (productId) => {
+    navigate(`/products/${productId}`);
   };
 
-  // Cargar los datos del producto por ID para edición
+  // Carga los datos del producto a editar
   const loadProduct = async () => {
     if (id) {
       const product = await getProductById(id);
       if (product) {
         reset({
-          nombre: product?.nombre || "",
-          precio: product?.precio || "",
-          categoria: product?.categoria || "",
-          stock: product?.stock || "",
+          nombre: product.nombre || "",
+          precio: product.precio || "",
+          categoria: product.categoria || "",
+          stock: product.stock || "",
         });
+      } else {
+        toast.error("Producto no encontrado");
+        navigate("/home");
       }
     }
   };
 
+  // Carga producto si hay un ID en la URL
   useEffect(() => {
     loadProduct();
   }, [id]);

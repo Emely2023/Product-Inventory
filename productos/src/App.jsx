@@ -14,7 +14,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<Products />} />
-        <Route path="*" element={<PagenotFound />} />
+        <Route path="*" element={<Products />} />
       </Routes>
        <Toaster
         position="top-right"

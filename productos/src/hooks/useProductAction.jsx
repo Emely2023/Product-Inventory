@@ -6,28 +6,28 @@ const API_URL = "https://retoolapi.dev/BuJvOm/productos";
 const useProductAction = (getProducts) => {
   const navigate = useNavigate();
 
-  // Eliminar producto por ID
+  // Función para eliminar un producto por su id
   const deleteProduct = async (id) => {
     try {
       const response = await fetch(`${API_URL}/${id}`, {
         method: "DELETE",
       });
 
-      if (!response.ok) throw new Error("Error al eliminar");
+      if (!response.ok) throw new Error("Error al eliminar el producto");
 
       toast.success("Producto eliminado correctamente");
       console.log("Producto eliminado:", response);
     } catch (error) {
-      console.error("Error al eliminar producto:", error);
+      console.error("Error al eliminar el producto:", error);
       toast.error("Error al eliminar el producto");
     } finally {
-      getProducts(); // Actualiza la lista después de eliminar
+      getProducts();
     }
   };
 
-  // Redirigir a la pantalla de edición con el ID
+  // Redirige a la ruta de edición del producto
   const handleUpdateProduct = (id) => {
-    navigate(`/editar-producto/${id}`);
+    navigate(`/products/${id}`);
   };
 
   return {
